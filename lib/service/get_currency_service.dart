@@ -10,7 +10,7 @@ class GetCurrencyService {
       if (res.statusCode == HttpStatus.ok) {
         return res.data;
       } else {
-        return "userError";
+        return "userE";
       }
     } catch (e) {
       if (e is SocketException){
