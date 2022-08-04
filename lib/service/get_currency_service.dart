@@ -1,20 +1,20 @@
-import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
-
-import 'package:dio/dio.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as https;
 
 class GetCurrencyService {
   static Future getCurrency() async {
     try {
-      Response res = await Dio().get("https://nbu.uz/uz/exchange-rates/json/");
-      if (res.statusCode == HttpStatus.ok) {
-        return res.data;
+      Response response = await https.get(Uri.parse('https://nbu.uz/exchange-rates/json/'));
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
+        return jsonDecode(response.body);
       } else {
-        return "userE";
+        return "yourself_mistake";
       }
     } catch (e) {
-      if (e is SocketException){
-        return "no";
+      if (e is SocketException) {
+        return 'no';
       }
       throw Exception(e);
     }

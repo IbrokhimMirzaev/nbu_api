@@ -19,11 +19,9 @@ class _MyHomePageState extends State<MyHomePage> {
           future: GetCurrencyService.getCurrency(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.data == "no") {
               return const Center(child: Text("No internet connection"));
-            } else if (snapshot.data == "userError") {
-              return const Center(child: Text("user"));
             } else {
               return ListView.builder(
                 itemBuilder: (context, index) {
